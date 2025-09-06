@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+
+
+
+
+      <link
+        rel="icon"
+        type="image/png"
+        href=""
+      >
+
+
+
+    <link
+      rel="expect"
+      href="#MainContent"
+      blocking="render"
+      id="view-transition-render-blocker"
+    >
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/overflow-list.css">
+<link rel="stylesheet" href="assets/css/template-giftcard.css">
+<link rel="stylesheet" href="assets/css/_drawer_fallback.css">
+<title>Sobre — Mandy Mess</title>
+</head>
+<body>
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": ,
+
+      "logo": ,
+
+    "url":
+  }
+</script>
+
+<header-component
+  id="header-component"
+  class=""
+
+    transparent=""
+
+
+    sticky=""
+
+  data-skip-node-update
+  data-scroll-direction="none"
+>
+
+
+
+
+
+
+
+
+
+      <div
+        class=""
+        ref="headerRowTop"
+
+          style=""
+
+      >
+        <div class="header__columns spacing-style">
+
+        </div>
+      </div>
+
+
+
+
+    <div class="header__row header__row--mobile desktop:hidden color-">
+
+    </div>
+
+</header-component>
+
+<script
+  src="assets/js/header.js"
+  type="module"
+></script>
+
+
+  body {
+    --header-height: 0px;
+    --header-group-height: var(--header-height);
+    --transparent-header-offset-boolean: 0; /* stylelint-disable-line declaration-property-value-disallowed-list */
+  }
+
+  body:has(> #header-group > header) {
+    --header-height: 60px;
+  }
+
+  body:has(> #header-group:empty) {
+    --header-group-height: 0px;
+  }
+
+  .header[transparent] {
+    --language-button-background-color: transparent;
+    --language-button-border-color: transparent;
+
+    /* used to apply transparency to .header__row, will only ever be transparent or unset */
+    --header-bg-color: transparent;
+
+    /* used to display the appropriate logo based on transparency state */
+    --header-logo-display: none;
+    --header-logo-inverse-display: block;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    /* transparent color scheme on .header should never apply its background color */
+    background-color: transparent;
+    z-index: var(--layer-overlay);
+
+    &[transparent='not-sticky'][data-sticky-state='active'],
+    /* Only show opaque background when hovering over menu items with children (mega menu)
+       Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
+    &:has(.mega-menu__list:hover),
+    &:has(.menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'], [data-animating])),
+    &:has(.menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'], [data-animating])) {
+      --header-logo-display: unset;
+      --header-logo-inverse-display: unset;
+      --header-bg-color: unset;
+      --color-foreground: inherit;
+      --color-foreground-rgb: inherit;
+      --color-background: inherit;
+      --color-background-rgb: inherit;
+      --color-border: inherit;
+      --color-border-rgb: inherit;
+
+      .header__row {
+        /* Faster transition for "in" animation */
+        transition: color var(--animation-values-fast), border-color var(--animation-values-fast),
+          background-color var(--animation-values-fast);
+      }
+    }
+
+    .header__row {
+      /* Slower transition for "out" animation */
+      transition: color var(--animation-values-slow), border-color var(--animation-values-slow),
+        background-color var(--animation-values-slow);
+    }
+  }
+
+  :is(.header[transparent]:not([data-sticky-state='active']), .header[transparent='always'][data-sticky-state='active'])
+    .header__row:not(
+      :has(
+          .mega-menu__list:hover,
+          .menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'], [data-animating]),
+          .menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'], [data-animating])
+        )
+    ) {
+    /* while transparent, header-row ignores its color-scheme settings, pull from the header-component */
+    --color-foreground: inherit;
+    --color-foreground-rgb: inherit;
+    --color-border: inherit;
+    --color-border-rgb: inherit;
+    --color-primary-button-background: inherit;
+    --color-primary-button-text: inherit;
+  }
+
+  .header--inherit-color-scheme-on-menu-open:has(.mega-menu__list:hover) .header__row,
+  .header--inherit-color-scheme-on-menu-open:has(
+      .menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'], [data-animating])
+    )
+    .header__row,
+  .header--inherit-color-scheme-on-menu-open:has(
+      .menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'], [data-animating])
+    )
+    .header__row {
+    --color-foreground: inherit;
+    --color-foreground-rgb: inherit;
+    --color-background: inherit;
+    --color-background-rgb: inherit;
+    --color-border: inherit;
+    --color-border-rgb: inherit;
+  }
+
+  .header-section {
+    position: relative;
+  }
+
+  #header-group:has(#header-component[sticky]) {
+    display: contents;
+  }
+
+  .header-section:has(> #header-component[sticky='always']),
+  .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']) {
+    position: sticky;
+
+    /* Use -1 instead of 0 so intersection observer can track sticky state */
+    top: -1px;
+    z-index: var(--layer-sticky);
+  }
+
+  .header[data-sticky-state] {
+    transition: opacity var(--animation-speed) var(--animation-easing);
+    opacity: 1;
+  }
+
+  .header[data-sticky-state='active'] {
+    view-transition-name: sticky-header;
+  }
+
+  .header[data-sticky-state='idle'],
+  .header[data-sticky-state='active'][data-animating] {
+    opacity: 0;
+  }
+
+  .header__row {
+    position: relative;
+
+    /* will default to bg from its color scheme unless --header-bg-color is transparent */
+    background-color: var(--header-bg-color, var(--color-background));
+  }
+
+  .header__row--top:not(.divider--page-width),
+  .header__row--top.divider--page-width .header__columns,
+  .header__row--bottom {
+    border-bottom: var(--border-bottom-width) solid var(--color-border);
+  }
+
+  @media screen and (max-width: 749px) {
+    .header__row--top:not(.divider--page-width),
+    .header__row--top.divider--page-width .header__columns {
+      border-bottom-width: var(--border-bottom-width-mobile);
+    }
+  }
+
+  .header__row.divider--page-width:not(.section--page-width) .header__columns {
+    @media screen and (min-width: 750px) {
+      padding-inline-start: 0;
+      padding-inline-end: 0;
+      margin-inline-start: var(--page-margin);
+      margin-inline-end: var(--page-margin);
+    }
+  }
+
+  .header__column {
+    display: flex;
+    align-items: center;
+
+    /* on mobile, header__column nodes are ignored to create a new grid-template-area based on all visible content */
+    @media screen and (max-width: 749px) {
+      display: contents;
+    }
+  }
+
+  .header__column--left,
+  .header__column--center {
+    gap: var(--gap-xl);
+    grid-area: left;
+  }
+
+  .header__column--center {
+    justify-content: center;
+    grid-area: center;
+
+    header-menu:only-child .overflow-menu::part(list) {
+      justify-content: center;
+    }
+  }
+
+  .header__column--right {
+    gap: var(--gap-xl);
+    justify-content: flex-end;
+    grid-area: right;
+
+    .overflow-menu::part(list) {
+      justify-content: flex-end;
+    }
+  }
+
+  .header__columns {
+    /* Three column layout */
+    --header-left: 1fr;
+    --header-center: auto;
+    --header-right: 1fr;
+    --header-template-columns: var(--header-left) var(--header-center) var(--header-right);
+
+    /* Mobile layout */
+    --header-mobile-bookend: 44px;
+
+    display: grid;
+    grid-template-areas: 'left center right';
+    grid-gap: var(--gap-xl);
+    grid-template-columns: var(--header-template-columns);
+
+    /* If menu is in center column */
+    &:has(.header__column--center header-menu) {
+      --header-center: auto;
+      --header-left: minmax(max-content, 1fr);
+      --header-right: minmax(max-content, 1fr);
+    }
+
+    /* If there is no center column, make the column the menu is in grow eagerly */
+    &:where(:not(:has(.header__column--center))) {
+      @media screen and (min-width: 750px) {
+        --header-template-columns: var(--header-left) var(--header-right);
+
+        grid-template-areas: 'left right';
+      }
+
+      /* If the header-menu is in the right column */
+      &:has(.header__column--right header-menu) {
+        --header-right: auto;
+        --header-left: minmax(max-content, 1fr);
+      }
+
+      /* If the header-menu is in the left column */
+      &:has(.header__column--left header-menu) {
+        --header-left: auto;
+        --header-right: minmax(max-content, 1fr);
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
+        var(--header-mobile-bookend) var(--header-mobile-bookend);
+
+      grid-template-areas: 'leftA leftB center rightA rightB';
+      grid-column: span 3;
+      column-gap: 0;
+      align-items: center;
+      padding-block: 0;
+      padding-inline: 0 var(--padding-3xs);
+
+      .header-logo {
+        grid-area: center;
+      }
+
+      &:not(:has(header-actions)) .search-action {
+        grid-area: leftB;
+      }
+
+      &:not(:has(.account-actions)) .search-action {
+        grid-area: rightA;
+      }
+
+      .search-action {
+        grid-area: leftB;
+      }
+
+      header-actions {
+        grid-area: rightB;
+      }
+    }
+  }
+
+  /* Single column layout if there are no columns within */
+  .header__columns:not(:has(.header__column)) {
+    grid-template-columns: 1fr;
+  }
+
+  /* Check for hover support to avoid unnecessary expensive recalculations when tapping on mobile */
+  @media (hover: hover) {
+    /* Column-specific dimming effect when any interactive element is hovered
+      Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
+    .header__column:has(header-menu:hover),
+    .header__column:has(.header-actions__action:hover),
+    .header__column:has(.dropdown-localization__button:hover),
+    .header__column:has(.header__icon--menu:hover) {
+      header-menu:not(:hover),
+      .header-actions__action:not(:hover),
+      .dropdown-localization__button:not(:hover),
+      .header__icon--menu:not(:hover) {
+        opacity: var(--opacity-subdued-text);
+        transition: opacity var(--animation-speed) var(--animation-easing);
+      }
+    }
+  }
+
+  /* Ensure smooth transitions for all interactive elements */
+  header-menu,
+  .header-actions__action,
+  .dropdown-localization__button,
+  .header__icon--menu {
+    transition: opacity var(--animation-speed) var(--animation-easing);
+  }
+
+  /* Extend hover area through padding to prevent flickering on actual menu items */
+  .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__link[aria-haspopup],
+  .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__link,
+  .menu-list__list-item:where(:not([slot='overflow'])) > button.menu-list__link {
+    margin-block: calc(-2 * var(--header-padding));
+    padding-block: calc(2 * var(--header-padding));
+    margin-inline: calc(-1 * var(--gap-xl) / 2);
+    padding-inline: calc(var(--gap-xl) / 2);
+  }
+
+  /* Set header paddings based on height setting */
+  .header {
+    --header-padding: var(--padding-sm);
+    --font-paragraph--line-height: 1;
+  }
+
+  .header.header--compact {
+    --header-padding: var(--padding-2xs);
+  }
+
+  .header__columns {
+    --padding-block-start: var(--header-padding);
+    --padding-block-end: var(--header-padding);
+  }
+
+  .header:not(.header--compact) .header__row--bottom {
+    --header-padding: var(--padding-xs);
+  }
+
+  .header--collapse-row-paddings {
+    .header__row--top .header__columns {
+      --padding-block-end: 0px;
+    }
+
+    .header__row--bottom .header__columns {
+      --padding-block-start: 0px;
+    }
+  }
+
+  /* When the header is transparent, add a margin to a potential header-section below it */
+  .header-section:has(.header[transparent]) + .shopify-section {
+    margin-top: var(--header-height);
+  }
+
+  /* When the header is transparent, and when there is no header-section below it, offset the first main-section with
+   * the height of the header
+   */
+
+  main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
+    &.spacing-style,
+    .spacing-style {
+      --section-top-offset: calc(var(--header-height) * var(--transparent-header-offset-boolean));
+
+      /* Any nested sections should not be offset */
+      :is(.spacing-style, .inherit-spacing) {
+        --section-top-offset: 0px;
+      }
+    }
+
+    /* Make sticky content immediately stick to the top of the page */
+    .sticky-content {
+      margin-top: calc(var(--header-height) * var(--transparent-header-offset-boolean) * -1);
+    }
+  }
+
+
+
+  <script type="module">
+    import { hydrate } from '@theme/section-hydration';
+    hydrate('');
+  </script>
+
+
+
+
+
+<div class="cart-drawer" aria-hidden="true">
+  <div class="cart-drawer__overlay" data-close-cart></div>
+  <aside class="cart-drawer__panel" role="dialog" aria-label="Carrinho">
+    <header class="cart-drawer__header">
+      <h3>Seu carrinho</h3>
+      <button class="button" data-close-cart>Fechar</button>
+    </header>
+    <div class="cart-drawer__items"></div>
+    <footer class="cart-drawer__footer">
+      <div class="subtotal">Subtotal: <strong data-subtotal>R$ 0,00</strong></div>
+      <button class="button button--primary" data-checkout>Finalizar compra</button>
+      <button class="button" data-clear>Esvaziar</button>
+    </footer>
+  </aside>
+</div>
+
+<main class='page-width rte'><h1>Sobre</h1></main>
+
+
+<div class="section-background color-"></div>
+<div
+  class="
+    section section-- color-
+
+  "
+>
+
+
+  <div
+    class="
+      spacing-style
+      layout-panel-flex
+      layout-panel-flex--
+      section-content-wrapper
+       mobile-column
+    "
+    style="
+
+
+--flex-direction: ; --flex-wrap: nowrap;
+
+
+  Renders the CSS variables for the `gap` styles needed for responsive scaling.
+  Intended for use with the `gap-style` class.
+
+  @param {number} value - The base or desktop gap value to use, in pixels.
+  @param {string} [name] - The name of the CSS variable to set. Default: 'gap'
+  @param {number} [scale_min] - Value above which gap scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs the original value.
+
+  @example
+  <div class="gap-style" style="
+  Renders the CSS variables for the `gap` styles needed for responsive scaling.
+  Intended for use with the `gap-style` class.
+
+  @param {number} value - The base or desktop gap value to use, in pixels.
+  @param {string} [name] - The name of the CSS variable to set. Default: 'gap'
+  @param {number} [scale_min] - Value above which gap scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs the original value.
+
+  @example
+  <div class="gap-style" style="
+  Renders the CSS variables for the `gap` styles needed for responsive scaling.
+  Intended for use with the `gap-style` class.
+
+  @param {number} value - The base or desktop gap value to use, in pixels.
+  @param {string} [name] - The name of the CSS variable to set. Default: 'gap'
+  @param {number} [scale_min] - Value above which gap scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs the original value.
+
+  @example
+  <div class="gap-style" style="
+  Renders the CSS variables for the `gap` styles needed for responsive scaling.
+  Intended for use with the `gap-style` class.
+
+  @param {number} value - The base or desktop gap value to use, in pixels.
+  @param {string} [name] - The name of the CSS variable to set. Default: 'gap'
+  @param {number} [scale_min] - Value above which gap scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs the original value.
+
+  @example
+  <div class="gap-style" style="
+  Renders the CSS variables for the `gap` styles needed for responsive scaling.
+  Intended for use with the `gap-style` class.
+
+  @param {number} value - The base or desktop gap value to use, in pixels.
+  @param {string} [name] - The name of the CSS variable to set. Default: 'gap'
+  @param {number} [scale_min] - Value above which gap scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs the original value.
+
+  @example
+  <div class="gap-style" style="
+  Renders the CSS variables for the `gap` styles needed for responsive scaling.
+  Intended for use with the `gap-style` class.
+
+  @param {number} value - The base or desktop gap value to use, in pixels.
+  @param {string} [name] - The name of the CSS variable to set. Default: 'gap'
+  @param {number} [scale_min] - Value above which gap scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs the original value.
+
+  @example
+  <div class="gap-style" style="
+  Renders the CSS variables for the `gap` styles needed for responsive scaling.
+  Intended for use with the `gap-style` class.
+
+  @param {number} value - The base or desktop gap value to use, in pixels.
+  @param {string} [name] - The name of the CSS variable to set. Default: 'gap'
+  @param {number} [scale_min] - Value above which gap scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs the original value.
+
+  @example
+  <div class="gap-style" style="">
+
+
+
+
+
+
+    --: max(px, calc(var(--gap-scale, 1.0) * px));
+
+    --: px;
+
+
+">
+
+
+
+
+
+
+    --: max(px, calc(var(--gap-scale, 1.0) * px));
+
+    --: px;
+
+
+">
+
+
+
+
+
+
+    --: max(px, calc(var(--gap-scale, 1.0) * px));
+
+    --: px;
+
+
+">
+
+
+
+
+
+
+    --: max(px, calc(var(--gap-scale, 1.0) * px));
+
+    --: px;
+
+
+">
+
+
+
+
+
+
+    --: max(px, calc(var(--gap-scale, 1.0) * px));
+
+    --: px;
+
+
+">
+
+
+
+
+
+
+    --: max(px, calc(var(--gap-scale, 1.0) * px));
+
+    --: px;
+
+
+">
+
+
+
+
+
+
+    --: max(px, calc(var(--gap-scale, 1.0) * px));
+
+    --: px;
+
+
+
+
+--horizontal-alignment: ; --vertical-alignment: ;
+--vertical-alignment-mobile: ;
+
+
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
+
+  @example
+  <div class="spacing-style" style="
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
+
+  @example
+  <div class="spacing-style" style="
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
+
+  @example
+  <div class="spacing-style" style="
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
+
+  @example
+  <div class="spacing-style" style="
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
+
+  @example
+  <div class="spacing-style" style="
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
+
+  @example
+  <div class="spacing-style" style="
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
+
+  @example
+  <div class="spacing-style" style="
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
+
+  @example
+  <div class="spacing-style" style="">
+
+
+">
+
+
+">
+
+
+">
+
+
+">
+
+
+">
+
+
+">
+
+
+">
+
+
+
+    "
+  >
+
+  </div>
+</div>
+
+
+
+<script src='assets/js/storefront.glue.js' defer></script>
+</body>
+</html>
