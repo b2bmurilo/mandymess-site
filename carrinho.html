@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MANDY MESS — Carrinho</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">MANDY MESS</a>
+      <nav class="nav">
+        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link" href="catalogo.html">Catálogo</a>
+        <a class="nav__link" href="sobre.html">Sobre</a>
+        <a class="nav__link active" href="carrinho.html">Carrinho <span data-cart-count>0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Seu carrinho</h1>
+    <div id="cart-items" class="cart-list"></div>
+    <div class="cart-summary">
+      <div>Subtotal: <strong id="cart-subtotal">R$ 0,00</strong></div>
+      <div class="actions">
+        <button class="btn" id="clear-cart">Esvaziar</button>
+        <button class="btn btn--primary" disabled>Finalizar compra</button>
+      </div>
+      <p class="note">Checkout real desativado (loja pausada). Este é um protótipo visual.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2025 MANDY MESS. Todos os direitos reservados.</div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script>
+    App.updateCartCount();
+    App.renderCartPage();
+  </script>
+</body>
+</html>

@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Produto — MANDY MESS</title>
+  <title>MANDY MESS — Home</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <meta name="color-scheme" content="dark">
 </head>
 <body>
   <header class="header">
     <div class="container header__row">
       <a class="logo" href="index.html">MANDY MESS</a>
       <nav class="nav">
-        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link is-active" href="index.html">Home</a>
         <a class="nav__link" href="catalogo.html">Catálogo</a>
         <a class="nav__link" href="sobre.html">Sobre</a>
         <button class="cart-btn" data-cart-open>🛒 <span data-cart-count>0</span></button>
@@ -19,46 +20,36 @@
     </div>
   </header>
 
-  <main class="container">
-    <div id="pdp" class="pdp">
-      <div class="pdp-gallery">
-        <img id="pdp-media" src="" alt="">
-        <div class="nav">
-          <button id="pdp-prev">‹</button>
-          <button id="pdp-next">›</button>
-        </div>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <img class="hero__media" src="https://images.unsplash.com/photo-1520971839721-483df1046061?q=80&w=2000&auto=format&fit=crop" alt="Hero">
       </div>
+    </section>
 
-      <div class="pdp-info">
-        <h1 id="pdp-title">Produto</h1>
-        <div id="pdp-price" class="price">R$ 0,00</div>
+    <section class="container">
+      <h2 class="section-title">Destaques</h2>
+      <ul id="home-grid" class="grid grid--products"></ul>
+    </section>
 
-        <div class="size-picker" id="pdp-sizes"></div>
-
-        <div class="pdp-actions">
-          <div class="qty">
-            <button data-qty="-1">−</button>
-            <input type="number" id="pdp-qty" value="1" min="1">
-            <button data-qty="+1">+</button>
-          </div>
-          <button id="pdp-add" class="btn btn--primary">Adicionar ao carrinho</button>
-          <button id="pdp-buy" class="btn btn--ghost">Compre já</button>
-        </div>
-
-        <p class="pdp-desc" id="pdp-desc">
-          Peça autoral com caimento confortável. Produção limitada. Entrega para todo o Brasil.
-        </p>
+    <section class="container">
+      <h2 class="section-title">Camisetas</h2>
+      <div class="slider">
+        <button class="slider__btn left" data-slide="left">‹</button>
+        <ul id="camisetas-slider" class="slider__track"></ul>
+        <button class="slider__btn right" data-slide="right">›</button>
       </div>
-    </div>
+    </section>
 
-    <section class="related">
-      <h2 class="section-title">Você também pode gostar</h2>
-      <ul id="related" class="grid grid--products"></ul>
+    <section class="container">
+      <h2 class="section-title">Suéters</h2>
+      <ul id="sueter-grid" class="grid grid--products"></ul>
     </section>
   </main>
 
   <footer class="footer"><div class="container">© 2025 MANDY MESS. Todos os direitos reservados.</div></footer>
 
+  <!-- Drawer do carrinho -->
   <div class="cart" aria-hidden="true">
     <div class="cart__overlay" data-cart-close></div>
     <aside class="cart__panel" role="dialog" aria-label="Carrinho">
@@ -81,7 +72,10 @@
   <script src="assets/js/data.js"></script>
   <script src="assets/js/app.js"></script>
   <script>
-    App.renderPDP();
+    App.renderHome("#home-grid");
+    App.renderCamisetasSlider("#camisetas-slider");
+    App.renderSueters("#sueter-grid");
+    App.initSlider();
     App.syncCartBadge();
   </script>
 </body>

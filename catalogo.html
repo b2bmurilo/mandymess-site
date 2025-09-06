@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MANDY MESS — Sobre</title>
+  <title>MANDY MESS — Catálogo</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -12,16 +12,19 @@
       <a class="logo" href="index.html">MANDY MESS</a>
       <nav class="nav">
         <a class="nav__link" href="index.html">Home</a>
-        <a class="nav__link" href="catalogo.html">Catálogo</a>
-        <a class="nav__link is-active" href="sobre.html">Sobre</a>
+        <a class="nav__link is-active" href="catalogo.html">Catálogo</a>
+        <a class="nav__link" href="sobre.html">Sobre</a>
         <button class="cart-btn" data-cart-open>🛒 <span data-cart-count>0</span></button>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <h1>Sobre</h1>
-    <p class="pdp-desc">Coleção autoral com estética urbana e toque dark — peças em malha e tricô com modelagens confortáveis.</p>
+  <main class="container" style="padding-top:12px">
+    <h2>Camisetas</h2>
+    <ul id="camisetas-grid" class="grid grid--products"></ul>
+
+    <h2 style="margin-top:26px">Suéters</h2>
+    <ul id="sueter-grid" class="grid grid--products"></ul>
   </main>
 
   <footer class="footer"><div class="container">© 2025 MANDY MESS. Todos os direitos reservados.</div></footer>
@@ -40,12 +43,17 @@
           <button class="btn btn--primary" disabled>Finalizar compra</button>
           <button class="btn" data-cart-clear>Esvaziar</button>
         </div>
+        <p class="pdp-desc">Checkout real desativado (loja pausada). Apenas visual.</p>
       </footer>
     </aside>
   </div>
 
   <script src="assets/js/data.js"></script>
   <script src="assets/js/app.js"></script>
-  <script>App.syncCartBadge();</script>
+  <script>
+    App.renderCamisetas("#camisetas-grid");
+    App.renderSueters("#sueter-grid");
+    App.syncCartBadge();
+  </script>
 </body>
 </html>
