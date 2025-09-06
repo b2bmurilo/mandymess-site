@@ -1,6 +1,0 @@
-:root{--bg:#000;--text:#fff;--line:#1f1f22}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
-img{max-width:100%;display:block}
-a{text-decoration:none;color:inherit}
-.page-width{max-width:1200px;margin:0 auto;padding:0 18px}
-.section-title{font-size:1.4rem;margin:28px 0 18px}
