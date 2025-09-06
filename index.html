@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandy Mess — Home</title>
+  <link rel="stylesheet" href="/mandymess-site/assets/style.css">
+  <script defer src="/mandymess-site/assets/app.js"></script>
+</head>
+<body>
+  
+<header class="header nav">
+  <div class="header__inner container">
+    <a class="header__logo" href="index.html">MANDY MESS</a>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="sobre.html">Sobre</a>
+      <button class="btn cart-btn" data-open-cart>🛒 <span data-cart-count>0</span></button>
+    </nav>
+  </div>
+</header>
+
+<!-- Cart Overlay -->
+<div class="cart-overlay">
+  <div class="cart-backdrop"></div>
+  <aside class="cart-panel">
+    <div class="cart-header">
+      <h3>Carrinho</h3>
+      <button class="btn small" data-close-cart>Fechar</button>
+    </div>
+    <div class="cart-items"></div>
+    <div class="cart-summary">
+      <div>Subtotal: <strong data-subtotal>R$ 0,00</strong></div>
+      <button class="btn" data-checkout>Finalizar compra</button>
+      <button class="btn small" onclick="Cart.clear()">Limpar carrinho</button>
+      <div class="small">Frete e impostos calculados no checkout.</div>
+    </div>
+  </aside>
+</div>
+
+  <section class="hero container" style="padding-top:24px">
+    <img class="hero__media" src="https://mandymess.com/cdn/shop/files/ezgif.com-resize_1.gif" alt="Mandy Mess hero">
+  </section>
+  <main class="container">
+    <h2 class="section-title">Catálogo</h2>
+    <section class="grid" data-catalog></section>
+  </main>
+  
+<footer class="footer container">
+  © 2025 Mandy Mess — Versão estática com Storefront API
+</footer>
+
+</body>
+</html>
