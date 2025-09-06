@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre - Mandy Mess</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo">Mandy Mess</a>
+      <nav class="header__nav">
+        <a href="catalogo.html">Catálogo</a>
+        <a href="sobre.html" class="active">Sobre</a>
+      </nav>
+      <button id="cart-toggle" class="header__cart">🛒</button>
+    </div>
+  </header>
+
+  <main>
+    <h1>Sobre</h1>
+    <p>Este é o site oficial da Mandy Mess. Para mais informações acesse <a href="https://mandymess.com/pages/sobre" target="_blank">a página oficial</a>.</p>
+  </main>
+
+  <aside id="cart-overlay" class="cart-overlay hidden">
+    <div class="cart">
+      <h2>Carrinho</h2>
+      <ul id="cart-items"></ul>
+      <button id="checkout-btn" class="button">Finalizar compra</button>
+    </div>
+  </aside>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
